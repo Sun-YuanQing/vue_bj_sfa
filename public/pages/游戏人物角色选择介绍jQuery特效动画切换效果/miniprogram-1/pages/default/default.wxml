@@ -1,0 +1,17 @@
+<view>
+  <swiper class="swiper" autoplay>
+    <swiper-item>
+
+      <navigator url="/pages/index/index">
+      <image src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1565108024772&di=49b9e7824e14d64d201a43aa277f9276&imgtype=0&src=http%3A%2F%2Fn.sinaimg.cn%2Fent%2Ftransform%2F20171115%2FLDuC-fynstfh9711260.jpg"></image>
+      </navigator>
+
+    </swiper-item>
+    <swiper-item>
+      <image src='https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1565108035052&di=be76976d8b7d09a7190dd237c2f4257a&imgtype=0&src=http%3A%2F%2Fimg.mp.itc.cn%2Fupload%2F20170127%2Fc77eb93805014781a8988e79e2828f02_th.jpeg'></image>
+    </swiper-item>
+    <swiper-item>
+      <image src='https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1565108064344&di=fbaa8962e86ee342df9184b9d5233f87&imgtype=0&src=http%3A%2F%2Fimg.haote.com%2Fupload%2Fnews%2Fimage%2F20180105%2F20180105093917_18616.jpg'></image>
+    </swiper-item>
+  </swiper>
+</view>

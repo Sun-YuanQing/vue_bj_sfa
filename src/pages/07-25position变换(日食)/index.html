@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<title></title>
+		<style type="text/css">
+			* {
+				margin: 0;
+				padding: 0;
+			}
+
+			html,
+			body {
+				width: 100%;
+				height: 100%;
+			}
+
+			.wrapper {
+				position: relative;
+				width: 100%;
+				height: 100%;
+				/* css3色值 饱和度 亮度 */
+				background-color: hsl(194, 66%, 49%);
+			}
+
+			.circle {
+				position: absolute;
+				width: 20%;
+				height: 0px;
+				padding-top: 20%;
+				/* border: #0A98D5 1px solid; */
+				border-radius: 50%;
+				top: 30%;
+				left: 30%;
+			}
+
+			.circle.sun {
+				background-color: #ffff77;
+				/* 水平 垂直 半径 */
+				box-shadow: 0 0 50px #ffff77;
+			}
+
+			.circle.moon {
+				left: 52%;
+				/*内阴影 水平 垂直 半径 */
+				box-shadow: inset 0 0 50px #ffff77;
+				/* 鼠标样式 */
+				cursor: pointer;
+				/* hsl(194,56%,'+(1-per)*50+'% */
+			}
+		</style>
+	</head>
+	<body>
+		<div class="wrapper">
+			<!-- h5音频标签 preload="auto"加载完播放 -->
+			<audio id="audio" src="./sun.mp3" preload="auto">
+				当前浏览器不支持audio
+			</audio>
+			<div class="per"></div>
+			<!-- 自适应 两个圆 -->
+			<div class="circle sun"></div>
+			<div class="circle moon"></div>
+		</div>
+		<script type="text/javascript">
+			var obj = {
+				init: function() {
+					this.sun = document.getElementsByClassName("sun")[0];
+					this.moon = document.getElementsByClassName("moon")[0];
+					this.bindEvent();
+				},
+				bindEvent: function() {
+					var _self = this;
+					var moon = this.moon;
+					/* 托拽事件 js dom move up */
+					/* 返回坐标 */
+					moon.onmousedown = function(e) {
+						var startX = moon.offsetLeft;
+						var dix = e.clientX - startX;
+						document.onmousemove = function(e) {
+							/* 水平方向上的托拽 */
+							moon.style.left = (e.clientX - dix) + 'px';
+							_self.getVoice();
+						}
+						document.onmouseup = function(e) {
+							document.onmousemove = null;
+						}
+					}
+				},
+				getVoice: function() {
+					/* 说明根据位置，覆盖的水平距离比直径的百分比per，改变音量和改变背景颜色 */
+					var _self = this;
+					var sun = this.sun;
+					var moon = this.moon;
+					var per;
+					var d = sun.clientWidth;
+
+					var sunL = sun.offsetLeft;
+					var moonL = moon.offsetLeft;
+					var sunR = sunL + d;
+					var moonR = moonL + d;
+					/* 临界值判断  没有覆盖 有覆盖 */
+					if (sunL > moonR || moonL > sunR) {
+						per = 0;
+					} else {
+						/* 右--左 */
+						if (moonL >= sunL) {
+							per = (sunR - moonL) / d;
+						} else if (moonR >= sunL) {
+							per = (moonR - sunL) / d;
+						}
+					}
+					_self.change(per);
+				},
+				change: function(per) {
+					var audio = document.getElementById('audio');
+					var wrapper = document.getElementsByClassName('wrapper')[0];
+					var moon = this.moon;
+					/* 播放和暂停 */
+					per > 0 ? audio.play() : audio.pause();
+					/* 音量 */
+					audio.volume = per;
+
+					moon.style.backgroundColor = ' hsl(194,66%,' + (1 - per) * 60 + '%)';
+					wrapper.style.backgroundColor = ' hsl(194,' + (194 + Math.floor(per * 160)) + '%,' + (1 - per) * 48 + '%)';
+				}
+			}
+			obj.init();
+		</script>
+	</body>
+</html>

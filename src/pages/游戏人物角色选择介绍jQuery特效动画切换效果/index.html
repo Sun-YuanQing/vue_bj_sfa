@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>游戏人物角色选择介绍JQUERY</title>
+    <link rel="stylesheet" type="text/css" href='jsdaima.css'>
+</head>
+<body>
+    <div class="container">
+        <div class="nav">
+            <ul>
+                <li class="item t1 on">
+                    <i></i>
+                    <em></em>
+                </li>
+                <li class="item t2">
+                    <i></i>
+                    <em></em>
+                    </li>
+                <li class="item t3">
+                    <i></i>
+                    <em></em>
+                </li>
+                <li class="item t4">
+                    <i></i>
+                    <em></em>
+                </li>
+            </ul>
+        </div>
+        <div class="box">
+            <div class="p show p1">
+                <span class="name"></span>
+                <img src="images/p1.png" alt="">
+            </div>
+            <div class="p p2">
+                    <span class="name"></span>
+                    <img src="images/p2.png" alt="">
+            </div>
+            <div class="p p3">
+                <span class="name"></span>
+                <img src="images/p3.png" alt="">
+            </div>
+            <div class="p p4">
+                    <span class="name"></span>
+                    <img src="images/p4.png" alt="">
+            </div>
+        </div>
+    </div>
+    <script src="js/jquery-1.11.0.min.js"></script>
+    <script>
+        $(function(){
+			$(".nav li").on('click',function(){
+				$(this).addClass('on').siblings().removeClass('on');
+				var p_index=$(this).index();
+				$(".p").eq(p_index).addClass('show').siblings().removeClass('show');
+			})
+        })
+    </script>
+</body>
+</html>

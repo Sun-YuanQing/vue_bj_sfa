@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<title>09-05抖音超火时钟屏保</title>
+		<style type="text/css">
+			* {
+				margin: 0;
+				padding: 0;
+			}
+
+			html,
+			body {
+				width: 100%;
+				height: 100%;
+				background: #000000;
+				overflow: hidden;
+			}
+
+			#clock {
+
+				width: 100%;
+				height: 100%;
+				background: #000000;
+			}
+
+			.lable {
+				font-size: 12px;
+				padding: 0 5px;
+				text-align: center;
+				color: #0000FF;
+				display: inline-block;
+				transition: left 1s linear, top 1s linear;
+				/* 旋转中心 */
+				transform-origin: left top;
+			}
+
+			.lableColor {
+				color: #FFA500
+			}
+		</style>
+
+	</head>
+	<body>
+		<div id="clock"></div>
+		<script type="text/javascript">
+			var monthText = ['一月', '二月', '三月', '四月', '五月', '六月', '七月', '八月', '九月', '十月', '十一月', '十二月'];
+			var dayText = ['1号', '2号', '3号', '4号', '5号', '6号', '7号', '8号', '9号', '10号', '11号', '12号', '13号', '14号', '15号',
+				'16号', '17号', '18号', '19号', '20号', '21号', '22号', '23号', '24号', '25号', '26号', '27号', '28号', '29号', '30号', '31号'
+			];
+			var weekText = ['星期日', '星期一', '星期二', '星期三', '星期四', '星期五', '星期六'];
+			var hourText = ['0点', '1点', '2点', '3点', '4点', '5点', '6点', '7点', '8点', '9点', '10点', '11点', '12点', '13点', '14点',
+				'15点', '16点', '17点', '18点', '19点', '20点', '21点', '22点', '23点'
+			];
+			var minuteText = ['0分', '1分', '2分', '3分', '4分', '5分', '6分', '7分', '8分', '9分', '10分', '11分', '12分', '13分', '14分',
+				'15分',
+				'16分', '17分', '18分', '19分', '20分', '21分', '22分', '23分', '24分', '25分', '26分', '27分', '28分', '29分', '30分',
+				'31分', '32分', '33分', '34分', '35分', '36分', '37分', '38分', '39分', '40分', '41分', '42分', '43分', '44分', '45分',
+				'46分', '47分', '48分', '49分', '50分', '51分', '52分', '53分', '54分', '55分', '56分', '57分', '58分', '59分',
+			];
+			var secondsText = ['0秒', '1秒', '2秒', '3秒', '4秒', '5秒', '6秒', '7秒', '8秒', '9秒', '10秒', '11秒', '12秒', '13秒', '14秒',
+				'15秒',
+				'16秒', '17秒', '18秒', '19秒', '20秒', '21秒', '22秒', '23秒', '24秒', '25秒', '26秒', '27秒', '28秒', '29秒', '30秒',
+				'31秒', '32秒', '33秒', '34秒', '35秒', '36秒', '37秒', '38秒', '39秒', '40秒', '41秒', '42秒', '43秒', '44秒', '45秒',
+				'46秒', '47秒', '48秒', '49秒', '50秒', '51秒', '52秒', '53秒', '54秒', '55秒', '56秒', '57秒', '58秒', '59秒'
+			];
+			var clock;
+			var monthList = [];
+			var dayList = [];
+			var weekList = [];
+			var hourList = [];
+			var minuteList = [];
+			var secondsList = [];
+			/* 多维数组 */
+			var testSet = [
+				[monthText, monthList],
+				[dayText, dayList],
+				[weekText, weekList],
+				[hourText, hourList],
+				[minuteText, minuteList],
+				[secondsText, secondsList]
+			];
+			/* console.log(new Date().Math.ma) */
+			window.onload = function() {
+				/* 1.创建元素，插入容器 */
+				init();
+				changeposition();
+				/* 处理时钟整体旋转角度 */
+				clock.style.transform = 'rotateZ(90deg)';
+				/* 2.获取当前的动态时间，显示高亮 */
+				setInterval(function() {
+					for (var i = 0; i < testSet[5][1].length; i++) {
+					   testSet[5][1][i].className = 'lable';
+					}
+					var nowdoms = document.getElementsByClassName('lableColor');
+					if (nowdoms.length > 0) {
+						for (var i = 0; i < nowdoms.length; i++) {
+
+							nowdoms[i].className = 'lable';
+						}
+					}
+
+					runTiem();
+				}, 500)
+				
+
+
+			}
+
+			function init() {
+				clock = document.getElementById("clock");
+				/* 动态生成标签 插入父级 */
+				for (var i = 0, len = testSet.length; i < len; i++) {
+					for (var j = 0, len1 = testSet[i][0].length; j < len1; j++) {
+						var temp = createlable(testSet[i][0][j]);
+						clock.appendChild(temp);
+						testSet[i][1].push(temp)
+					}
+				}
+				/* console.log(testSet); */
+			}
+			/* 创建元素div */
+			function createlable(text) {
+				var div = document.createElement('div');
+				div.classList.add('lable');
+				div.innerHTML = text;
+				return div;
+			}
+
+			function runTiem() {
+				var now = new Date();
+				var month = now.getMonth();
+				var day = now.getDate();
+				var week = now.getDay();
+				var hour = now.getHours();
+				var minute = now.getMinutes();
+				var seconds = now.getSeconds();
+				/* 把零散的值统一起来 */
+				/* 数字 --index -- dom --文字内容 */
+				var nowValue = [month, day - 1, week, hour, minute, seconds];
+				/* 清空标签高亮 */
+				/* 动态改变标签 高亮 */
+				for (var i = 0, len = nowValue.length; i < len; i++) {
+
+					testSet[i][1][nowValue[i]].classList.add('lableColor');
+				}
+				/* console.log(nowValue); */
+				changeCircle();
+				if (isCicle) {
+					/* dom位置改变（left,top absolute） 平铺   圆形 */
+					/* 同圆心 窗口中心位置 */
+					var widthconter = document.body.clientWidth / 2;
+					var heightconter = document.body.clientHeight / 2;
+					/* 遍历所有的dom标签 */
+					for (var i = 0, len = testSet.length; i < len; i++) {
+						for (var j = 0, len1 = testSet[i][1].length; j < len1; j++) {
+							var temp = testSet[i][1][j];
+							/* 先算出单个角度，再乘份额 */
+							var deg = 360 / testSet[i][1].length * (j - nowValue[i]);
+							/* 越来越大 */
+							var r = (i + 1) * 35 + 20 * i;
+
+							var x = Math.sin(deg * Math.PI / 180) * r + widthconter;
+							var y = heightconter - Math.cos(deg * Math.PI / 180) * r;
+							temp.style.transform = 'rotateZ(' + (deg - 90) + 'deg)'
+
+							temp.style.left = x + 'px';
+							temp.style.top = y + 'px';
+						}
+					}
+				}
+			}
+			var isCicle = false;
+
+			function changeCircle() {
+				isCicle = true;
+			}
+			/* 平铺  offsetLeft  left  abslute  left*/
+			function changeposition() {
+				for (let i = 0, len = testSet.length; i < len; i++) {
+					for (let j = 0, len1 = testSet[i][1].length; j < len1; j++) {
+						let temp = testSet[i][1][j];
+						let templeft = temp.offsetLeft;
+						let tempTop = temp.offsetTop;
+						setTimeout(function() {
+							temp.style.position = 'absolute';
+							temp.style.left = templeft + 'px';
+							temp.style.top = tempTop + 'px';
+						})
+					}
+				}
+			}
+		</script>
+	</body>
+</html>

@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+        <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<title></title>
+		<style type="text/css">
+			* {
+				margin: 0;
+				padding: 0;
+			}
+
+			body {
+				background: #000000;
+				color: #fff;
+				text-align: center;
+			}
+
+			.container {
+				perspective: 1000px;
+				width: 300px;
+				height: 300px;
+				margin: 50px auto 100px;
+			}
+
+			.container .cude {
+				transform-style: preserve-3d;
+				position: relative;
+				width: 100%;
+				height: 100%;
+			}
+
+			.container .cude img {
+				position: absolute;
+				display: block;
+				width: 100%;
+				height: 100%;
+				top: 0;
+				left: 0;
+			}
+
+			.img1 {
+				transform: translateZ(150px);
+			}
+
+			.img2 {
+				transform: rotateX(180deg) translateZ(150px);
+			}
+
+			.img3 {
+				transform: rotateY(90deg) translateZ(150px);
+			}
+
+			.img4 {
+				transform: rotateY(-90deg) translateZ(150px);
+			}
+
+			.img5 {
+				transform: rotateX(90deg) translateZ(150px);
+			}
+
+			.img6 {
+				transform: rotateX(-90deg) translateZ(150px);
+			}
+
+			.container .cude.init {
+				transform: translateZ(-150px) rotateX(-15deg) rotateY(18deg);
+			}
+
+			h2 {
+				margin-bottom: 50px;
+			}
+
+			.image-btns {
+				display: grid;
+				grid-template-columns: 105px 105px 105px;
+				grid-template-rows: 85px 85px;
+				justify-content: center;
+				grid-gap: 15px;
+			}
+
+			input {
+				width: 105px;
+				height: 85px;
+				border: 2px solid white;
+				outline: none;
+
+			}
+
+			input:focus {
+				border: 2px solid #FFA500;
+			}
+.container .cude.image1 {
+				transform: translateZ(-150px) ;
+				transition: 0.5s;
+			}
+			.container .cude.image2 {
+				transform: translateZ(-150px) rotateX(-180deg);
+				transition: 0.5s;
+			}
+
+			.container .cude.image3 {
+				transform: translateZ(-150px) rotateY(-90deg);
+				transition: 0.5s;
+			}
+
+			.container .cude.image4 {
+				transform: translateZ(-150px) rotateY(90deg);
+				transition: 0.5s;
+			}
+
+			.container .cude.image5 {
+				transform: translateZ(-150px) rotateX(-90deg);
+				transition: 0.5s;
+			}
+
+			.container .cude.image6 {
+				transform: translateZ(-150px) rotateX(90deg);
+				transition: 0.5s;
+			}
+		</style>
+	</head>
+	<body>
+		<div class="container">
+			<div class="cude init">
+				<img src="img/1.jpg" alt="" class="img1">
+				<img src="img/2.jpg" alt="" class="img2">
+				<img src="img/3.jpg" alt="" class="img3">
+				<img src="img/4.jpg" alt="" class="img4">
+				<img src="img/5.jpg" alt="" class="img5">
+				<img src="img/6.jpg" alt="" class="img6">
+			</div>
+		</div>
+		<h2>请点击下面的图片</h2>
+		<div class="image-btns">
+			<input type="image" src="img/1.jpg" class="image1">
+			<input type="image" src="img/2.jpg" class="image2">
+			<input type="image" src="img/3.jpg" class="image3">
+			<input type="image" src="img/4.jpg" class="image4">
+			<input type="image" src="img/5.jpg" class="image5">
+			<input type="image" src="img/6.jpg" class="image6">
+		</div>
+		<script type="text/javascript">
+			(function() {
+				var imbtns = document.getElementsByTagName('input');
+				var cubeNode = document.getElementsByClassName('cude')[0];
+				var clist = cubeNode.classList;
+				var className = clist[1];
+				for (var i = 0, len = imbtns.length; i < len; i++) {
+					imbtns[i].addEventListener('click', clickFun)
+				}
+
+				function clickFun(e) {
+					var trageName = e.target.className;
+					clist.replace(className, trageName);
+					className = trageName;
+				}
+			}());
+		</script>
+	</body>
+</html>
