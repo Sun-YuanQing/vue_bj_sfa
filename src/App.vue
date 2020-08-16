@@ -30,7 +30,7 @@
 
 		mounted() {
 			console.log('gggg')
-			this.$router.push('/test')
+			this.$router.push('/about')
 			window.addEventListener('scroll', this.onWscrollTop)
 		},
 		computed: {},
