@@ -1,0 +1,102 @@
+@import '~@/styles/base.less';
+
+.invoice-list {
+  .date-show {
+    display: flex;
+    justify-content: flex-end;
+    margin: 5px 0 10px;
+    .date-box {
+      display: flex;
+      padding: 5px;
+      justify-content: space-between;
+      align-items: center;
+      border-radius: 3px;
+      width: 50%;
+      background: #fff;
+      & > span {
+        height: 100%;
+        width: 36%;
+        line-height: 20px;
+        text-align: center;
+        &.gray {
+          color: @color-gray;
+        }
+        &:nth-of-type(2) {
+          width: 5%;
+        }
+      }
+      .calendar-icon {
+        width: 0.4rem;
+        height: 0.4rem;
+        color: #457fff;
+      }
+    }
+  }
+  .content {
+    .collapse-item {
+      position: relative;
+      margin-bottom: 10px;
+      .inner-list {
+        .inner-list-item {
+          position: relative;
+          display: flex;
+          align-items: center;
+          justify-content: space-around;
+          color: #457fff;
+          word-break: break-word;
+          margin-bottom: 10px;
+          &.border::after {
+            content: '';
+            position: absolute;
+            bottom: -3px;
+            left: -5px;
+            right: -5px;
+            height: 1px;
+            transform: scaleY(0.5);
+            background: #c9c9c9;
+          }
+          .invoice-index {
+            width: 10%;
+          }
+          .delete-btn {
+            height: 24px !important;
+          }
+          img {
+            width: 2.6rem;
+            height: 1.5rem;
+            border: 1px solid #3c4486;
+          }
+        }
+      }
+      .coll-item-icon {
+        color: #457fff;
+        line-height: 24px;
+        &.active {
+          transform: rotateZ(90deg);
+        }
+      }
+      &::after {
+        content: '';
+        position: absolute;
+        top: 34px;
+        left: 0;
+        right: 0;
+        height: 1px;
+        transform: scaleY(0.5);
+        background: #457fff;
+      }
+    }
+  }
+}
+
+.empty {
+  padding: 100px 0 0;
+  text-align: center;
+  color: #3c3c3c;
+  line-height: 22px;
+  margin: auto;
+  width: 6.26rem;
+  img {
+    width: 50%;
+  }
+}

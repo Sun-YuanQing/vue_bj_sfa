@@ -1,7 +1,7 @@
 
 		 
 		        var w = window.screen.width;
-		        var targetW = 550; 
+		        var targetW = 1920; 
 		        var scale = w / targetW; //当前尺寸/目标尺寸
 		        var meta = document.createElement("meta");
 		        meta.name = "viewport";
