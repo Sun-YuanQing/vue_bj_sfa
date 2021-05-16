@@ -54,6 +54,7 @@ for (let t:any=1; t <= dayMax; t++) {
 	
 // console.log(year, month, day, years, months, days);
 export{
+	date,
 	year,
 	month,
 	day,

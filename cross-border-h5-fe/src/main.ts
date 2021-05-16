@@ -22,6 +22,11 @@ Rem(window, 750); // rem 换算
 //   },
 // });
 
+Vue.filter('dateDay', function(date) {
+	
+	return date.getDate();
+})
+
 Vue.config.productionTip = false;
 
 new Vue({
