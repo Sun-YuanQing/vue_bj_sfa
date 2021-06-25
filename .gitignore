@@ -20,3 +20,4 @@ yarn-error.log*
 *.sln
 *.sw?
 cross-border-h5-fe/
+H5-model/
